@@ -16,5 +16,6 @@ public class Driver {
         graph.printGraph();
 
         graph.BFS(3);
+        graph.DFS(3);
     }
 }

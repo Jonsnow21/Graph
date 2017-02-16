@@ -19,6 +19,7 @@ public class Graph {
 
     public void addEdge(int from, int to) {
         adjLists[from].addNode(to);
+        adjLists[to].addNode(from);
     }
 
     public void printGraph() {
@@ -42,7 +43,7 @@ public class Graph {
 
         while (!queue.isEmpty()) {
             int n = queue.poll();
-            System.out.print(n+" ");
+            System.out.print(n + " ");
 
             AdjList adjList = this.adjLists[n];
             Node temp = adjList.root;
@@ -55,6 +56,26 @@ public class Graph {
             }
         }
 
+    }
+
+    private void DFSUtil(boolean[] visited, int s) {
+        visited[s] = true;
+        System.out.print(s + " ");
+        AdjList adjList = this.adjLists[s];
+        Node temp = adjList.root;
+        while(temp != null) {
+            if (!visited[temp.data]) {
+                visited[temp.data] = true;
+                DFSUtil(visited, temp.data);
+            }
+            temp = temp.next;
+        }
+    }
+
+    public void DFS(int s) {
+        System.out.println();
+        boolean[] visited = new boolean[v];
+        DFSUtil(visited, s);
     }
 
 }
